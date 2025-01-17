@@ -23,7 +23,7 @@ _io_r0_1 = [ # revision, could have a _io_r0_2 if for some reason we had a seper
         Subsignal("so",   Pins("R7"), IOStandard("LVCMOS33")),  # Serial Out (MISO)
         Subsignal("hold",  Pins("P7"), IOStandard("LVCMOS33")),  # Hold
         Subsignal("sck",  Pins("T7"), IOStandard("LVCMOS33")),  # serial clock
-        Subsignal("si",  Pins("T6"), IOStandard("LVCMOS33")), # serial in
+        Subsignal("si",  Pins("T6"), IOStandard("LVCMOS33")) # serial in
         
     ),
 
@@ -39,7 +39,7 @@ _io_r0_1 = [ # revision, could have a _io_r0_2 if for some reason we had a seper
         Subsignal("oe",  Pins("L12"), IOStandard("LVCMOS33")),  # output enable
         Subsignal("we",  Pins("G5"), IOStandard("LVCMOS33")), # write enable
         Subsignal("lb",  Pins("A1"), IOStandard("LVCMOS33")), # lower byte
-        Subsignal("ub",  Pins("B2"), IOStandard("LVCMOS33")), # upper byte
+        Subsignal("ub",  Pins("B2"), IOStandard("LVCMOS33")) # upper byte
     ),
 
 
@@ -63,26 +63,35 @@ _io_r0_1 = [ # revision, could have a _io_r0_2 if for some reason we had a seper
     #clk
     ("clk", 0,
         # Input/Output pins for the clock generator
-        Subsignal("s0",    Pins("A2"), IOStandard("LVCMOS33")),  # Signal 0 (S0)
         Subsignal("y3",    Pins("C8"), IOStandard("LVCMOS33")),  # Output signal Y3
-        Subsignal("y4",    Pins("E8"), IOStandard("LVCMOS33")),  # Output signal Y4
-        Subsignal("xout",  Pins("A7"), IOStandard("LVCMOS33")),  # External Clock Output (XOUT)
         Subsignal("s1",    Pins("D5"), IOStandard("LVCMOS33")),  # Serial Data (SDA, I2C)
         Subsignal("s2",    Pins("C4"), IOStandard("LVCMOS33")),  # Serial Clock (SCL, I2C)
         Subsignal("y1",    Pins("J1"), IOStandard("LVCMOS33")),  # Output signal Y1
-        Subsignal("y2",    Pins("K1"), IOStandard("LVCMOS33")),  # Output signal Y2
+        Subsignal("y2",    Pins("K1"), IOStandard("LVCMOS33"))  # Output signal Y2
     ),
 
-    #JTAG
-    ("jtag", 0,
+    #FTDI
+    ("FTDI", 0,
         Subsignal("tdo", Pins("M10"), IOStandard("LVCMOS33")),
         Subsignal("tck", Pins("T10"), IOStandard("LVCMOS33")),
         Subsignal("tdi", Pins("R11"), IOStandard("LVCMOS33")),
         Subsignal("tms", Pins("T11"), IOStandard("LVCMOS33")),
+        Subsignal("d_n", Pins("B2"), IOStandard("LVCMOS33")),
+        Subsignal("d_p", Pins("B1"), IOStandard("LVCMOS33"))
+
     ),
 
+     #QSPI Flash
+    ("QSPI", 0,
+        Subsignal("cs", Pins("N8"), IOStandard("LVCMOS33")),
+        Subsignal("MISO", Pins("T7"), IOStandard("LVCMOS33")),
+        Subsignal("d2", Pins("M7"), IOStandard("LVCMOS33")),
+        Subsignal("d3", Pins("N7"), IOStandard("LVCMOS33")),
+        Subsignal("sck", Pins("N9"), IOStandard("LVCMOS33")),
+        Subsignal("mosi", Pins("T8"), IOStandard("LVCMOS33"))
+        
+    )
     
-     
 ]
 
 
@@ -101,8 +110,6 @@ _connector_r0_1 = [
 
     
 ]
-
-_spi_config = [("spi_cs", Pins("N9"), IOStandard("LVCMOS33"))]
 
 
 
