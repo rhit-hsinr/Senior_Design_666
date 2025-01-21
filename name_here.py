@@ -60,12 +60,10 @@ _io_r0_1 = [ # revision, could have a _io_r0_2 if for some reason we had a seper
 
     ),
 
-    #clk
+    clk
     ("clk", 0,
         # Input/Output pins for the clock generator
         Subsignal("y3",    Pins("C8"), IOStandard("LVCMOS33")),  # Output signal Y3
-        Subsignal("s1",    Pins("D5"), IOStandard("LVCMOS33")),  # Serial Data (SDA, I2C)
-        Subsignal("s2",    Pins("C4"), IOStandard("LVCMOS33")),  # Serial Clock (SCL, I2C)
         Subsignal("y1",    Pins("J1"), IOStandard("LVCMOS33")),  # Output signal Y1
         Subsignal("y2",    Pins("K1"), IOStandard("LVCMOS33"))  # Output signal Y2
     ),
@@ -91,6 +89,13 @@ _io_r0_1 = [ # revision, could have a _io_r0_2 if for some reason we had a seper
         Subsignal("mosi", Pins("T8"), IOStandard("LVCMOS33"))
         
     )
+
+    # I2C Interface for MS5351M
+    ("i2c", 0,
+        Subsignal("scl", Pins("C4")),  # Clock line (I2C SCL)
+        Subsignal("sda", Pins("D5")),  # Data line (I2C SDA)
+        IOStandard("LVCMOS33")
+    ),
     
 ]
 
@@ -117,21 +122,19 @@ _connector_r0_1 = [
 
 class Platform(LatticeECP5Platform):
     # LFE5U-25F-6BG256C
-    default_clk_name   = "xout"
-    default_clk_period = 1e9/27e6
+    default_clk_name   = "clk"
+    default_clk_period = 1e9 / 27e6  # 27 MHz clock
 
-    def __init__(self, revision="0.2", device="25F", toolchain="trellis", **kwargs):
-        assert revision in ["0.1""]
-        assert device in ["25F"]
-        self.revision = revision
-        io         = {"0.1": _io_r0_1}[revision]
-        connectors = {"0.1": _connectors_r0_1}[revision]
-        LatticeECP5Platform.__init__(self, f"LFE5U-{device}-8MG285C", io, connectors, toolchain=toolchain, **kwargs)
+    def __init__(self, device="25F", toolchain="trellis", **kwargs):
+        # Initialize the platform with the Lattice ECP5 device (adjust with your specific board)
+        LatticeECP5Platform.__init__(self, f"LFE5U-{device}-6BG256C", _io_r0_1, _connector_r0_1, toolchain=toolchain, **kwargs)
+        self.i2c = I2CController(self)
 
     def create_programmer(self):
-        
+        # Create a DFU programmer for flashing the FPGA (adjust as needed)
         return DFUProg(vid="1209", pid="5af0", alt=0)
 
     def do_finalize(self, fragment):
+        # Perform final steps like adding constraints
         LatticeECP5Platform.do_finalize(self, fragment)
-        self.add_period_constraint(self.lookup_request("clk48", loose=True), 1e9/48e6)
+        self.add_period_constraint(self.lookup_request("clk", loose=True), 1e9 / 48e6)  # 48 MHz clock (example constraint)
