@@ -32,11 +32,17 @@ from litex.soc.integration.platform import Platform
 
 from clock_generator import ClockGenerator
 
+# Import the NEORV32 processor core
+from litex.soc.cores.neorv32 import NEORV32
+
 
 class BaseSoC(BaseSoC):
     def __init__(self, platform, sys_clk_freq=int(27e6), with_fram=False, **kwargs):
         # SoC constructor
         BaseSoC.__init__(self, platform, clk_freq=sys_clk_freq, **kwargs)
+
+        self.cpu = NEORV32(platform)
+        self.add_cpu(self.cpu)
 
         # FRAM (optional)
         if with_fram:
