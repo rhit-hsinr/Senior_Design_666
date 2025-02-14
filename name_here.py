@@ -105,13 +105,13 @@ _io_r0_1 = [ # revision, could have a _io_r0_2 if for some reason we had a seper
 
 _connector_r0_1 = [
      #connector 1
-    ("gpio_1", Pins("E3 C1 E2 D1 F2 E1 G2 F1 H2 G1 F3 P1 R1 T2 T3 K2 L2 N1 P2 M3 P3 N3") IOStandard("LVCMOS33")),
+    ("gpio_1", Pins("E3 C1 E2 D1 F2 E1 G2 F1 H2 G1 F3 D3 C3 B3 A3 B4 A4 B5 A5 B6 A6") IOStandard("LVCMOS33")),
     #connector 2
-    ("gpio_2", Pins("R4 T4 P4 N5 M5 N11 R12 P12 R13 T13 P13 R15 P14 N12 T14 R14 T15 R16 P15 P16 N14 N16") IOStandard("LVCMOS33")),
+    ("gpio_2", Pins("P1 R1 T2 T3 K2 L2 N1 P2 M3 P3 N3 B7 D6 C5 D7 C6 C7 B8 C9 D9 B9 C10 D11") IOStandard("LVCMOS33")),
     #connector 3
-    ("gpio_3", Pins("D3 C3 B3 A3 B4 A4 B5 A5 B6 A6 B7 D6 C5 D7 C6 C7 B8 C9 D9 B9 C10 D11") IOStandard("LVCMOS33")),
+    ("gpio_3", Pins("R4 T4 P4 N5 M5 N11 R12 P12 R13 T13 P13 A8 B10 A9 C11 A10 B12 A11 B11 A12 B13 C12") IOStandard("LVCMOS33")),
     #connector 4
-    ("gpio_4", Pins("A8 B10 A9 C11 A10 B12 A11 B11 A12 B13 C12 C14 D14 E14 A13_i B14_i A14_i B15_i C15_i B16_i C16_i D16_i") IOStandard("LVCMOS33"))
+    ("gpio_4", Pins("R15 P14 N12 T14 R14 T15 R16 P15 P16 N14 N16 C14 D14 E14 A13_i B14_i A14_i B15_i C15_i B16_i C16_i D16_i") IOStandard("LVCMOS33"))
 
     
 ]
